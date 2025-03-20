@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import Index from "./pages/Index";
 import Consultation from "./pages/Consultation";
 import DocumentAnalysis from "./pages/DocumentAnalysis";
@@ -14,30 +14,16 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Detecta se estamos rodando em um subdiretório no GitHub Pages
-const getBasename = () => {
-  // Em desenvolvimento, use caminho raiz
-  if (import.meta.env.DEV) return '/';
-  
-  // Em produção, use o pathname do repositório se existir
-  const { pathname } = window.location;
-  const pathSegments = pathname.split('/');
-  
-  // Se tiver pelo menos 2 segmentos e o primeiro for vazio (devido à barra inicial)
-  if (pathSegments.length >= 2 && pathSegments[0] === '') {
-    // Retorna o primeiro segmento como basename
-    return `/${pathSegments[1]}`;
-  }
-  
-  return '/';
-};
+// Para GitHub Pages, é melhor usar o HashRouter
+// pois ele usa hash (#) para rotas, o que funciona melhor em hospedagens estáticas
+const Router = import.meta.env.DEV ? BrowserRouter : HashRouter;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={getBasename()}>
+      <Router>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/consultoria" element={<Consultation />} />
@@ -48,7 +34,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </TooltipProvider>
   </QueryClientProvider>
 );
