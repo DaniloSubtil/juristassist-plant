@@ -2,6 +2,7 @@
 import React from 'react';
 import { Layout } from '@/components/Layout';
 import { Chatbot } from '@/components/Chatbot';
+import { Link } from 'react-router-dom';
 
 const Consultation = () => {
   const faqItems = [
@@ -75,9 +76,12 @@ const Consultation = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 Nosso assistente virtual pode ajudar com questões gerais, mas para casos específicos, recomendamos consultar um advogado.
               </p>
-              <button className="w-full bg-jurist-600 text-white rounded-lg py-2 hover:bg-jurist-700 button-transition">
+              <Link 
+                to="/encontrar-advogado" 
+                className="block w-full bg-jurist-600 text-white rounded-lg py-2 hover:bg-jurist-700 button-transition text-center"
+              >
                 Encontrar advogado especializado
-              </button>
+              </Link>
             </div>
           </aside>
         </div>

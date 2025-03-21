@@ -10,6 +10,8 @@ import DocumentAnalysis from "./pages/DocumentAnalysis";
 import CaseLawSearch from "./pages/CaseLawSearch";
 import DocumentCreation from "./pages/DocumentCreation";
 import CaseTracking from "./pages/CaseTracking";
+import LawyerRegistration from "./pages/LawyerRegistration";
+import LawyerDirectory from "./pages/LawyerDirectory";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/jurisprudencia" element={<CaseLawSearch />} />
           <Route path="/peticoes" element={<DocumentCreation />} />
           <Route path="/processos" element={<CaseTracking />} />
+          <Route path="/cadastro-advogado" element={<LawyerRegistration />} />
+          <Route path="/encontrar-advogado" element={<LawyerDirectory />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

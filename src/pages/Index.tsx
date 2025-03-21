@@ -3,7 +3,7 @@ import React from 'react';
 import { Layout } from '@/components/Layout';
 import { Chatbot } from '@/components/Chatbot';
 import { Link } from 'react-router-dom';
-import { BookOpen, FileText, Scale, FilePlus, Search, FileCheck } from 'lucide-react';
+import { BookOpen, FileText, Scale, FilePlus, Search, FileCheck, UserPlus } from 'lucide-react';
 
 const Index = () => {
   const services = [
@@ -38,10 +38,10 @@ const Index = () => {
       path: '/processos'
     },
     {
-      title: 'Biblioteca Jurídica',
-      description: 'Acesse leis, doutrinas e materiais de referência',
-      icon: <BookOpen className="w-6 h-6 text-jurist-600" />,
-      path: '/consultoria'
+      title: 'Encontrar Advogado',
+      description: 'Encontre advogados especializados para o seu caso',
+      icon: <UserPlus className="w-6 h-6 text-jurist-600" />,
+      path: '/encontrar-advogado'
     }
   ];
 
@@ -58,6 +58,20 @@ const Index = () => {
           <p className="max-w-2xl mx-auto text-xl text-muted-foreground">
             Consultoria jurídica automatizada com inteligência artificial para advogados e clientes.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+            <Link 
+              to="/consultoria" 
+              className="bg-jurist-600 hover:bg-jurist-700 text-white px-6 py-3 rounded-lg button-transition"
+            >
+              Iniciar consultoria
+            </Link>
+            <Link 
+              to="/encontrar-advogado" 
+              className="bg-white border border-jurist-300 hover:bg-jurist-50 text-jurist-800 px-6 py-3 rounded-lg button-transition"
+            >
+              Encontrar advogado
+            </Link>
+          </div>
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
@@ -91,6 +105,25 @@ const Index = () => {
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="py-8 text-center">
+          <div className="inline-block rounded-full bg-jurist-100 px-3 py-1 text-sm text-jurist-800 mb-4">
+            Área do Advogado
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            É advogado? Junte-se à nossa rede
+          </h2>
+          <p className="max-w-2xl mx-auto text-muted-foreground mb-6">
+            Cadastre-se como parceiro para aumentar sua visibilidade e conquistar novos clientes através da nossa plataforma.
+          </p>
+          <Link 
+            to="/cadastro-advogado" 
+            className="inline-flex items-center bg-jurist-600 hover:bg-jurist-700 text-white px-6 py-3 rounded-lg button-transition"
+          >
+            <UserPlus className="mr-2 h-5 w-5" />
+            Cadastrar como advogado
+          </Link>
         </section>
       </div>
     </Layout>

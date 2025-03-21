@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, UserPlus, Search } from 'lucide-react';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,6 +29,7 @@ export const Navbar = () => {
     { name: 'Jurisprudência', path: '/jurisprudencia' },
     { name: 'Petições', path: '/peticoes' },
     { name: 'Processos', path: '/processos' },
+    { name: 'Encontrar Advogado', path: '/encontrar-advogado' },
   ];
 
   return (
@@ -58,6 +59,13 @@ export const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/cadastro-advogado"
+              className="ml-2 bg-jurist-600 hover:bg-jurist-700 text-white px-4 py-2 rounded-md text-sm flex items-center"
+            >
+              <UserPlus className="mr-2 h-4 w-4" />
+              Área do Advogado
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -89,6 +97,13 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
+          <Link
+            to="/cadastro-advogado"
+            className="mt-4 bg-jurist-600 hover:bg-jurist-700 text-white px-6 py-2 rounded-md flex items-center"
+          >
+            <UserPlus className="mr-2 h-4 w-4" />
+            Área do Advogado
+          </Link>
         </nav>
       </div>
     </header>
