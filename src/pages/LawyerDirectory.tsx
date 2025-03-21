@@ -4,17 +4,18 @@ import { Layout } from '@/components/Layout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, MapPin, Phone, Mail, Star, Filter, ArrowUpDown } from 'lucide-react';
+import { Search, MapPin, Phone, Mail, Star, Filter, ArrowUpDown, User } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // Mock dos dados de advogados
 const lawyers = [
   {
     id: 1,
     name: "Dra. Carolina Mendes",
-    photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "", // Foto vazia para futuros uploads
     specialization: "Direito de Família",
     experience: "10 anos",
     location: "São Paulo, SP",
@@ -26,11 +27,12 @@ const lawyers = [
     description: "Especialista em direito de família com vasta experiência em divórcios, guarda compartilhada e pensão alimentícia.",
     email: "carolina@exemplo.com",
     phone: "(11) 99999-1234",
+    initials: "CM",
   },
   {
     id: 2,
     name: "Dr. Ricardo Oliveira",
-    photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "",
     specialization: "Direito Trabalhista",
     experience: "8 anos",
     location: "Rio de Janeiro, RJ",
@@ -42,11 +44,12 @@ const lawyers = [
     description: "Especializado em causas trabalhistas com foco em garantir os direitos dos trabalhadores.",
     email: "ricardo@exemplo.com",
     phone: "(21) 98888-5678",
+    initials: "RO",
   },
   {
     id: 3,
     name: "Dra. Fernanda Costa",
-    photo: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "",
     specialization: "Direito Civil",
     experience: "12 anos",
     location: "Belo Horizonte, MG",
@@ -58,11 +61,12 @@ const lawyers = [
     description: "Advogada com forte atuação em direito civil, contratos e responsabilidade civil.",
     email: "fernanda@exemplo.com",
     phone: "(31) 97777-9012",
+    initials: "FC",
   },
   {
     id: 4,
     name: "Dr. Eduardo Santos",
-    photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "",
     specialization: "Direito Penal",
     experience: "15 anos",
     location: "São Paulo, SP",
@@ -74,11 +78,12 @@ const lawyers = [
     description: "Criminalista experiente com atuação em júris e defesas criminais complexas.",
     email: "eduardo@exemplo.com",
     phone: "(11) 96666-3456",
+    initials: "ES",
   },
   {
     id: 5,
     name: "Dra. Mariana Lima",
-    photo: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "",
     specialization: "Direito Tributário",
     experience: "9 anos",
     location: "Brasília, DF",
@@ -90,11 +95,12 @@ const lawyers = [
     description: "Especialista em direito tributário com foco em planejamento tributário e contencioso administrativo.",
     email: "mariana@exemplo.com",
     phone: "(61) 95555-7890",
+    initials: "ML",
   },
   {
     id: 6,
     name: "Dr. Gustavo Martins",
-    photo: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3",
+    photo: "",
     specialization: "Direito do Consumidor",
     experience: "7 anos",
     location: "Curitiba, PR",
@@ -106,6 +112,7 @@ const lawyers = [
     description: "Advogado especializado em direito do consumidor, com experiência em ações contra empresas e bancos.",
     email: "gustavo@exemplo.com",
     phone: "(41) 94444-2109",
+    initials: "GM",
   },
 ];
 
@@ -132,13 +139,15 @@ const LawyerCard = ({ lawyer }: { lawyer: typeof lawyers[0] }) => {
     <Card className={`overflow-hidden transition-all ${lawyer.plan === 'premium' ? 'border-jurist-300 shadow-md' : ''}`}>
       <CardContent className="p-0">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {/* Foto e Detalhes Básicos */}
-          <div className="md:col-span-1 relative">
-            <img 
-              src={lawyer.photo} 
-              alt={lawyer.name} 
-              className="w-full h-64 md:h-full object-cover"
-            />
+          {/* Área para Foto */}
+          <div className="md:col-span-1 relative bg-muted flex items-center justify-center h-64 md:h-full">
+            <Avatar className="w-32 h-32">
+              <AvatarImage src={lawyer.photo} alt={lawyer.name} />
+              <AvatarFallback className="text-4xl bg-jurist-100 text-jurist-700">
+                {lawyer.initials}
+              </AvatarFallback>
+            </Avatar>
+            
             {lawyer.verified && (
               <div className="absolute top-2 right-2 bg-jurist-100 rounded-full p-1">
                 <Badge variant="outline" className="bg-white/80 text-jurist-800 flex items-center gap-1">
