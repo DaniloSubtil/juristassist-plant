@@ -16,9 +16,9 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Para GitHub Pages, é melhor usar o HashRouter
-// pois ele usa hash (#) para rotas, o que funciona melhor em hospedagens estáticas
-const Router = import.meta.env.DEV ? BrowserRouter : HashRouter;
+// Para GitHub Pages, usamos HashRouter
+// Em desenvolvimento, usamos BrowserRouter para melhor experiência
+const Router = import.meta.env.PROD ? HashRouter : BrowserRouter;
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
