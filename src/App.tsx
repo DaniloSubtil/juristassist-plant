@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Consultation from "./pages/Consultation";
 import DocumentAnalysis from "./pages/DocumentAnalysis";
@@ -16,16 +16,13 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Para GitHub Pages, usamos HashRouter
-// Em desenvolvimento, usamos BrowserRouter para melhor experiência
-const Router = import.meta.env.PROD ? HashRouter : BrowserRouter;
-
+// Sempre usamos HashRouter para garantir compatibilidade com GitHub Pages
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Router>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/consultoria" element={<Consultation />} />
@@ -38,7 +35,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
+      </HashRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
